@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  web:
+    build: nginx/
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/static:/usr/share/nginx/html
+  server:
+    build: server/
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./server:/var/www/html
+  db:
+    build: db/
+    ports:
+        - "3308:3308"
+    container_name: db
+    environment:
+      MYSQL_DATABASE: appDB
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: 1
